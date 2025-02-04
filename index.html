@@ -63,7 +63,7 @@
 <body id="page-top" class="h-100 overflow-x-hidden w-100">
 
     <!-- Preloader Start -->
-    <div class="preloader bg-white h-100 position-fixed w-100">
+    <div class="preloader bg-white1 h-100 position-fixed w-100">
         <svg width="100px" height="100px" viewBox="0 0 100 100" y="0px" x="0px" class="position-absolute start-50 top-50 translate-middle">
             <g>
                 <path class="anim-heart" d="M89.49,37.8c0,25.54-39.59,46.24-39.59,46.24S10.31,63.34,10.31,37.8c0-29.59,39.59-28.67,39.59,0C49.9,10.06,89.49,8.21,89.49,37.8 z" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round" stroke-width="3.5" stroke="#000000" fill="#DDB796"></path>
@@ -793,6 +793,26 @@
     <!-- Required JS files -->
     <script src="assets/js/script.min.js"></script>
     <script>
+       const preloader = document.querySelector('.preloader');
+
+        // Wait for 10 seconds after page load
+        setTimeout(() => {
+            let opacity = 1; // Starting opacity
+
+            // Reduce opacity every second
+            const fadeInterval = setInterval(() => {
+                opacity -= 0.1; // Reduce opacity gradually
+                preloader.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+
+                // Stop fading when opacity reaches 0
+                if (opacity <= 0) {
+                    clearInterval(fadeInterval);
+                //    preloader.style.display = 'none'; // Optionally hide the preloader
+                }
+            }, 1000); // Every second
+        }, 10000); // 
+
+
         const months = [
   'January',
   'February',
