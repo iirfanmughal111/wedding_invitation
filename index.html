@@ -22,6 +22,42 @@
     <link rel="icon" href="assets/img/favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="assets/img/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="icon" href="assets/img/favicon.ico">
+    <style>
+        /* deadline */
+.deadline {
+    display: flex;
+}
+
+.deadline-format {
+    background-color: #102a42;
+    color: #FFF;
+    margin-right: 3%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    width: 5rem;
+    height: 5rem;
+}
+
+.deadline-format h2 {
+    color: #FFF;
+    margin-bottom: 0;
+}
+
+.deadline-format span {
+    text-transform: uppercase;
+    font-size: .85rem;
+    display: block;
+    letter-spacing: 2px;
+    margin-top: -22px;
+}
+
+.deadline-format h2:not(.expired) {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.25rem;
+}
+    </style>
 </head>
 
 <body id="page-top" class="h-100 overflow-x-hidden w-100">
@@ -222,11 +258,33 @@
                     <p class="fs-5 mb-4 text-body-secondary">If you have only one smile in you, give it to the people you love.</p>
                     <span class="divider divider-arrow"></span>
                 </div>
+                <div class="col-12  mb-5 mb-xl-0 mt-5  justify-content-center d-flex">
+                    <!-- <h3 class="giveaway">giveaway ends on Saunday, 16 February 2025 01:30pm</h3> -->
+                    <div class="deadline d-flex justify-content-between">
+                        <div class="deadline-format">
+                          <h2 class="days">34</h2>
+                          <span>days</span>
+                        </div>
+                        <div class="deadline-format">
+                          <h2 class="hours">34</h2>
+                          <span>hours</span>
+                        </div>
+                        <div class="deadline-format">
+                          <h2 class="minutes">34</h2>
+                          <span>mins</span>
+                        </div>
+                        <div class="deadline-format">
+                          <h2 class="seconds">34</h2>
+                          <span>secs</span>
+                        </div>
+                      </div>
+                </div>
                 <!-- //.col-12 -->
             </div>
             <!-- //.row -->
 
             <div class="row gx-lg-5 justify-content-center">
+                
                 <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 mb-5 mb-xl-0">
                     <div class="position-relative">
                         <div class="d-flex flex-column h-100 justify-content-between position-absolute start-0 text-center top-0 w-100">
@@ -253,6 +311,7 @@
                     <!-- //.position-relative -->
                 </div>
                 <!-- //.col-12 -->
+
 
                 <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 mb-5 mb-xl-0 mt-xl-5">
                     <div class="position-relative">
@@ -666,7 +725,7 @@
                             <span class="divider divider-heart mb-4"></span>
 
                             <div class="mb-2 text-body-secondary">
-                                <p>Your presence at our Walima is the greatest gift we could ask for.</p>
+                                <p>Your presence at our Wedding is the greatest gift we could ask for.</p>
                                 <p>
                                     However, if you would like to honor us with a gift, we will deeply appreciate your thoughtfulness and generosity.
                                     
@@ -821,6 +880,97 @@
 
     <!-- Required JS files -->
     <script src="assets/js/script.min.js"></script>
+    <script>
+        const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+const weekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+// const giveaway = document.querySelector('.giveaway');
+const deadline = document.querySelector('.deadline-format');
+const items = document.querySelectorAll('.deadline-format h2');
+
+let tempDate = new Date();
+let tempYear = tempDate.getFullYear();
+let tempMonth = tempDate.getMonth();
+let tempDay = tempDate.getDate();
+console.log(tempDay,tempMonth,tempYear)
+// months are ZERO index based;
+const futureDate = new Date(2025, 1, 16, 13, 30, 0);
+
+// let futureDate = new Date(2020, 3, 24, 11, 30, 0);
+
+const year = futureDate.getFullYear();
+const hours = futureDate.getHours();
+const minutes = futureDate.getMinutes();
+
+let month = futureDate.getMonth();
+month = months[month];
+const weekday = weekdays[futureDate.getDay()];
+const date = futureDate.getDate();
+// giveaway.textContent = `giveaway ends on ${weekday}, ${date} ${month} ${year} ${hours}:${minutes}am`;
+
+const futureTime = futureDate.getTime();
+function getRemaindingTime() {
+  const today = new Date().getTime();
+
+  const t = futureTime - today;
+  // 1s = 1000ms
+  // 1m = 60s
+  // 1hr = 60m
+  // 1d = 24hr
+  // values in miliseconds
+  const oneDay = 24 * 60 * 60 * 1000;
+  const oneHour = 60 * 60 * 1000;
+  const oneMinute = 60 * 1000;
+  // calculate all values
+  let days = t / oneDay;
+  days = Math.floor(days);
+  let hours = Math.floor((t % oneDay) / oneHour);
+  let minutes = Math.floor((t % oneHour) / oneMinute);
+  let seconds = Math.floor((t % oneMinute) / 1000);
+
+  // set values array
+  const values = [days, hours, minutes, seconds];
+  function format(item) {
+    if (item < 10) {
+      return (item = `0${item}`);
+    }
+    return item;
+  }
+
+  items.forEach(function (item, index) {
+    item.innerHTML = format(values[index]);
+  });
+
+  if (t < 0) {
+    clearInterval(countdown);
+    // deadline.innerHTML = `<h4 class="expired">sorry, this giveaway has expired!</h4>`;
+  }
+}
+// countdown;
+let countdown = setInterval(getRemaindingTime, 1000);
+//set initial values
+getRemaindingTime();
+    </script>
 </body>
 
 
