@@ -794,10 +794,12 @@
     <script src="assets/js/script.min.js"></script>
     <script>
        const preloader = document.querySelector('.preloader');
+       let opacity = 1; // Starting opacity
 
+       preloader.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
         // Wait for 10 seconds after page load
         setTimeout(() => {
-            let opacity = 1; // Starting opacity
+             opacity = 1; // Starting opacity
 
             // Reduce opacity every second
             const fadeInterval = setInterval(() => {
@@ -809,7 +811,7 @@
                     clearInterval(fadeInterval);
                 //    preloader.style.display = 'none'; // Optionally hide the preloader
                 }
-            }, 1000); // Every second
+            }, 3000); // Every second
         }, 10000); // 
 
 
