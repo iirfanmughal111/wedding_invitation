@@ -798,7 +798,7 @@
        const preloader = document.querySelector('.preloader');
        let opacity = 1; // Starting opacity
 
-       preloader.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+       preloader.style.backgroundColor = `rgba(f, f, f, ${opacity})`;
         // Wait for 10 seconds after page load
         setTimeout(() => {
              opacity = 1; // Starting opacity
@@ -806,7 +806,7 @@
             // Reduce opacity every second
             const fadeInterval = setInterval(() => {
                 opacity -= 0.1; // Reduce opacity gradually
-                preloader.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+                preloader.style.backgroundColor = `rgba(f, f, f, ${opacity})`;
 
                 // Stop fading when opacity reaches 0
                 if (opacity <= 0) {
