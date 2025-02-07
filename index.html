@@ -57,6 +57,9 @@
     margin-bottom: 0.25rem;
     letter-spacing: 0.25rem;
 }
+.user_name{
+    font-weight: bold !important;
+}
     </style>
 </head>
 
@@ -142,7 +145,9 @@
                     <!-- //.border -->
 
                     <h3 class="fs-1 font-alt mb-3">Together with Their Families</h3>
-                    <p class="lead mb-5 text-body-secondary">Request The Honor of Your Presence at Their Wedding Ceremony</p>
+                    <!-- <p class="lead mb-5 text-body-secondary">Request The Honor of Your Presence at Their Wedding Ceremony</p> -->
+                    <p class="lead mb-5 text-body-secondary">Respected <span class="user_name"></span>, I Request the Honor of Your Presence at My Wedding Ceremony.</p>
+
                     <span class="divider divider-arrow"></span>
                 </div>
                 <!-- //.col-lg-6 -->
@@ -683,14 +688,14 @@
                     <div class="border bg-white pb-5 position-relative z-2 d-none1">
                         <h3 class="border-bottom bg-primary font-alt m-0 p-4 text-center text-white">Invitation</h3>
 
-                        <form action="https://envato.lucky-roo.com/loise-v1.1/rsvp.php" method="post" class="bg-white p-4 position-relative">
+                        <form action="#" method="post" class="bg-white p-4 position-relative">
                             <div class="row">
                                 <div class="col-12 mb-3 position-relative">
-                                    <input type="text" name="rsvp_name" id="rsvp-name" data-rules="required" class="border-0 border-bottom p-3 w-100" placeholder="Your Full Name">
+                                    <input type="text" name="rsvp_name" id="rsvp-name" data-rules="required" disabled class="border-0 border-bottom p-3 w-100" placeholder="Your Full Name">
                                 </div>
                                 <!-- //.col-12 -->
 
-                                <div class="col-12 mb-3 position-relative">
+                                <div class="col-12 mb-3 position-relative d-none">
                                     <input type="email" name="rsvp_email" id="rsvp-email" data-rules="email" class="border-0 border-bottom p-3 w-100" placeholder="Your Email Address">
                                 </div>
                                 <!-- //.col-12 -->
@@ -818,91 +823,101 @@
 
 
         const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-const weekdays = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-// const giveaway = document.querySelector('.giveaway');
-const deadline = document.querySelector('.deadline-format');
-const items = document.querySelectorAll('.deadline-format h2');
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+            ];
+        const weekdays = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        ];
+        // const giveaway = document.querySelector('.giveaway');
+        const deadline = document.querySelector('.deadline-format');
+        const items = document.querySelectorAll('.deadline-format h2');
 
-let tempDate = new Date();
-let tempYear = tempDate.getFullYear();
-let tempMonth = tempDate.getMonth();
-let tempDay = tempDate.getDate();
-console.log(tempDay,tempMonth,tempYear)
-// months are ZERO index based;
-const futureDate = new Date(2025, 1, 16, 13, 30, 0);
+        let tempDate = new Date();
+        let tempYear = tempDate.getFullYear();
+        let tempMonth = tempDate.getMonth();
+        let tempDay = tempDate.getDate();
+        console.log(tempDay,tempMonth,tempYear)
+        // months are ZERO index based;
+        const futureDate = new Date(2025, 1, 16, 13, 30, 0); //16/2/2025 1:30pm
 
-// let futureDate = new Date(2020, 3, 24, 11, 30, 0);
+        // let futureDate = new Date(2020, 3, 24, 11, 30, 0);
 
-const year = futureDate.getFullYear();
-const hours = futureDate.getHours();
-const minutes = futureDate.getMinutes();
+        const year = futureDate.getFullYear();
+        const hours = futureDate.getHours();
+        const minutes = futureDate.getMinutes();
 
-let month = futureDate.getMonth();
-month = months[month];
-const weekday = weekdays[futureDate.getDay()];
-const date = futureDate.getDate();
-// giveaway.textContent = `giveaway ends on ${weekday}, ${date} ${month} ${year} ${hours}:${minutes}am`;
+        let month = futureDate.getMonth();
+        month = months[month];
+        const weekday = weekdays[futureDate.getDay()];
+        const date = futureDate.getDate();
+        // giveaway.textContent = `giveaway ends on ${weekday}, ${date} ${month} ${year} ${hours}:${minutes}am`;
 
-const futureTime = futureDate.getTime();
-function getRemaindingTime() {
-  const today = new Date().getTime();
+        const futureTime = futureDate.getTime();
+        function getRemaindingTime() {
+        const today = new Date().getTime();
 
-  const t = futureTime - today;
-  // 1s = 1000ms
-  // 1m = 60s
-  // 1hr = 60m
-  // 1d = 24hr
-  // values in miliseconds
-  const oneDay = 24 * 60 * 60 * 1000;
-  const oneHour = 60 * 60 * 1000;
-  const oneMinute = 60 * 1000;
-  // calculate all values
-  let days = t / oneDay;
-  days = Math.floor(days);
-  let hours = Math.floor((t % oneDay) / oneHour);
-  let minutes = Math.floor((t % oneHour) / oneMinute);
-  let seconds = Math.floor((t % oneMinute) / 1000);
+        const t = futureTime - today;
+        // 1s = 1000ms
+        // 1m = 60s
+        // 1hr = 60m
+        // 1d = 24hr
+        // values in miliseconds
+        const oneDay = 24 * 60 * 60 * 1000;
+        const oneHour = 60 * 60 * 1000;
+        const oneMinute = 60 * 1000;
+        // calculate all values
+        let days = t / oneDay;
+        days = Math.floor(days);
+        let hours = Math.floor((t % oneDay) / oneHour);
+        let minutes = Math.floor((t % oneHour) / oneMinute);
+        let seconds = Math.floor((t % oneMinute) / 1000);
 
-  // set values array
-  const values = [days, hours, minutes, seconds];
-  function format(item) {
-    if (item < 10) {
-      return (item = `0${item}`);
-    }
-    return item;
-  }
+        // set values array
+        const values = [days, hours, minutes, seconds];
+        function format(item) {
+            if (item < 10) {
+            return (item = `0${item}`);
+            }
+            return item;
+        }
 
-  items.forEach(function (item, index) {
-    item.innerHTML = format(values[index]);
-  });
+        items.forEach(function (item, index) {
+            item.innerHTML = format(values[index]);
+        });
 
-  if (t < 0) {
-    clearInterval(countdown);
-    // deadline.innerHTML = `<h4 class="expired">sorry, this giveaway has expired!</h4>`;
-  }
-}
+        if (t < 0) {
+            clearInterval(countdown);
+            // deadline.innerHTML = `<h4 class="expired">sorry, this giveaway has expired!</h4>`;
+        }
+        }
 document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    if (name) {
+        document.getElementById('rsvp-name').value = name;
+        const elements = document.getElementsByClassName('user_name');
+        for (let i = 0; i < elements.length; i++) {
+            elements[i].innerHTML = name;
+        }
+        
+    }
     // countdown;
     let countdown = setInterval(getRemaindingTime, 1000);
     // set initial values
