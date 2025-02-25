@@ -826,7 +826,7 @@
                 }
             }, 5000); // Every second
         }, 15000); // 
-
+        let countdown = null;
 
         const months = [
             'January',
@@ -907,9 +907,12 @@
         items.forEach(function (item, index) {
             item.innerHTML = format(values[index]);
         });
-
+console.log(t)
         if (t < 0) {
             clearInterval(countdown);
+            items.forEach(function (item, index) {
+                item.innerHTML = '00';
+            });
             // deadline.innerHTML = `<h4 class="expired">sorry, this giveaway has expired!</h4>`;
         }
         }
@@ -925,7 +928,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
     }
     // countdown;
-    let countdown = setInterval(getRemaindingTime, 1000);
+     countdown = setInterval(getRemaindingTime, 1000);
     // set initial values
     getRemaindingTime();
 });
